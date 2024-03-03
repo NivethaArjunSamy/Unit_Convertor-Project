@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit convertor</title>
+    <style>
+        html, body {
+            font-family: cursive !important;
+        }
+
+         .btn{
+            background-color: rgb(48, 224, 195);
+            border-radius: 20px;
+            padding: 4px;
+            margin-top: 20px;
+            border: 5px solid;
+            border-color: antiquewhite;
+            
+            
+         }
+         input{
+            border: solid;
+            border-radius: 20px;
+            padding: 4px;
+            
+            background-color: rgb(212, 193, 206);
+         }
+    </style>
+</head>
+<body style="background-color: black;">
+    <div style="text-align: center; background-color: aqua; 
+    padding: 30px; margin: 200px; border-radius: 30px;">
+        <h1>
+            Unit Convertor
+        </h1>
+        <select id="from" class="btn">
+            <option value="cm">From centi meter</option>
+            <option value="m">From metere</option>
+            <option value="mm">From milli meter</option>
+            <option value="km">From kilo meter</option>
+        </select>
+
+        <input type="number" placeholder="Enter to convert" id="inputValue"/>
+
+        <select id="to" class="btn">
+            <option value="cm">To centi meter</option>
+            <option value="m">To metere</option>
+            <option value="mm">To milli meter</option>
+            <option value="km">To kilo meter</option>
+        </select>
+        <br>
+        <button onclick="convert()" class="btn">convert</button>
+        <h3 id="result"></h3>
+    </div>
+</body>
+<script>
+    function convert() {
+        
+        var fromUnit = document.getElementById("from").value;
+        var toUnit = document.getElementById("to").value;
+        var inputValue = parseFloat(document.getElementById("inputValue").value);
+
+        var result;
+
+        if(!inputValue){
+            document.getElementById("result").innerHTML="Enter something to search";
+            return;
+        }
+        result = fromUnit === "cm" ? (
+            toUnit === "m" ? inputValue/ 100 :
+            toUnit === "mm" ? inputValue* 10 :
+            toUnit === "km" ? inputValue /100000 :
+            inputValue
+        ) : fromUnit === "m" ? (
+            toUnit === "cm" ? inputValue *100 :
+            toUnit === "mm" ? inputValue *1000 :
+            toUnit === "km" ? inputValue /1000 :
+            inputValue
+        ) : fromUnit === "mm" ? (
+            toUnit === "cm" ? inputValue / 10 :
+            toUnit === "m" ? inputValue / 1000 :
+            toUnit === "km" ? inputValue / 1000000 :
+            inputValue
+        ) : fromUnit === "km" ? (
+            toUnit === "cm" ? inputValue * 100000 :
+            toUnit === "m" ? inputValue * 1000 :
+            toUnit === "mm" ? inputValue* 1000000 :
+            inputValue
+        ) : inputValue;
+
+
+        
+        document.getElementById("result").innerHTML= inputValue + " " + fromUnit + " = " + result + " " + toUnit;
+    }
+</script>
+</html>
